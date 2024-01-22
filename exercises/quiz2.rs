@@ -35,19 +35,11 @@ mod my_module {
         // TODO: Complete the output declaration!
         let mut output: Vec<String> = vec![];
         for (string, command) in input.iter() {
-            let mut string = string.clone();
-            let output_string = match command {
-                Command::Uppercase => string.to_uppercase(),
-                Command::Trim => string.trim().to_string(),
-                Command::Append(mut times) => {
-                    while times > 0 {
-                        string.push_str("bar");
-                        times -= 1;
-                    }
-                    string
-                }
-            };
-            output.push(output_string);
+            match command {
+                Command::Uppercase => output.push(string.to_uppercase()),
+                Command::Trim => output.push(string.trim().to_string()),
+                Command::Append(n) => output.push(string.to_string() + &"bar".repeat(*n)),
+            }
         }
         output
     }
